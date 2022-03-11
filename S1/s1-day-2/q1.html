@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+
+    let amar = {
+        name: "Amar",
+        city: "Goa",
+        skill: "Singing",
+        conductKaraoke : function(song) {
+            console.log(`${this.name} can sing ${song} in ${this.city}`);
+        }
+    }
+
+    let akbar = {
+        name: "Akbar",
+        city: "Mumbai",
+        skill: "Chef",
+        cookFood: function(food) {
+            console.log(`${this.name} can cook ${food} in ${this.city}`);
+        }
+    }
+
+    let anthony = {
+        name: "Anthony",
+        city: "Kashmir",
+        skill: "Magician",
+        magicShow: function(magic) {
+            console.log(`${this.name} can ${magic} in ${this.city}`);
+        }
+    }
+
+    amar.conductKaraoke.call(akbar, "Levitating");
+    amar.conductKaraoke.call(anthony, "Closer");
+
+    akbar.cookFood.call(amar, "noodles");
+    akbar.cookFood.call(anthony, "pasta");
+
+    anthony.magicShow.call(amar, "hide pencil");
+    anthony.magicShow.call(akbar, "replace items");
+
+    // useFunc.call(amar)
+
+</script>
