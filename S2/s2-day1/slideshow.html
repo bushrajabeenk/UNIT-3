@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>
+        <button onclick="start()" >Start</button>
+        <button onclick="pause()" >Pause</button>
+    </div>
+
+    <div id="container" >
+
+    </div>
+</body>
+</html>
+
+<script>
+
+    // let id;
+    // let i = 0;
+
+    // function start() 
+    // {
+    //     let images = JSON.parse(localStorage.getItem('images'));
+
+    //     let container = document.getElementById('container');
+    //     container.innerHTML = null;
+
+    //     let img = document.createElement('img');
+
+    //     img.src = images[i];            
+        
+    //     container.append(img);
+
+    //     id = setInterval(function() {
+
+    //         if(i === images.length)
+    //         {
+    //             i = 0;
+    //         }
+
+    //         let image = images[i]; //url
+    //         container.innerHTML = null;
+    //         let img = document.createElement('img');
+    //         img.src = images;
+    //         container.append(img);
+    //         i++;
+
+    //     }, 1000);
+
+    // }
+
+    // function pause() 
+    // {
+
+    //     clearInterval(id);
+
+    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Optimisation step - 1
+    // // for getting images as slideshow
+
+    // let images = JSON.parse(localStorage.getItem('images'));
+
+    // let container = document.getElementById('container');
+
+    // let i=0;
+
+    // setInterval(function(){
+    //     let image = images[i];
+    //     container.innerHTML = ""; // to get images one after another, by replacing the previously appearing image with next image
+    //     let img = document.createElement("img");
+    //     img.src = images[i];
+
+    //     container.append(img);
+
+    //     i++;
+    // }, 1000);
+
+    // output observation
+    // here the images are getting appended, but we want images asd slideshow, i.e we want the f
+    // second image to replace the previous image,,... and so on
+
+
+    
+
+
+
+
+
+
+
+    // Optimisation step - 2
+
+    // let images = JSON.parse(localStorage.getItem('images'));
+
+    // let container = document.getElementById('container');
+
+    // let i=0;
+
+    // setInterval(function(){
+
+    //     //  the below if loop tells, if the current image being displayed is last image from the array, it is asking
+    //     //  it to display the next image as the first image in the array
+
+    //         if(i === images.length)
+    //         {
+    //             i = 0;
+    //         }
+
+    //         let image = images[i];
+    //         container.innerHTML = ""; // to get images one after another, by replacing the previously appearing image with next image
+    //         let img = document.createElement("img");
+    //         img.src = images[i];
+
+    //         container.append(img);
+
+    //         i++;
+    // }, 1000);
+    // // all the images are being displayed in a cyclic manner, after 3rd image, the first image is being displayed
+    // output observation
+    // we want to display output on clicking the button start
+
+
+
+
+
+
+
+
+    // Optimisation step - 3
+
+    // let id; // declaring globally, so that it can be used for clearing interval in the pause function
+    // // now for starting the slideshow using start button , wrap this entire code inside start function
+    // function start() 
+    // {
+    //     let images = JSON.parse(localStorage.getItem('images'));
+
+    //     let container = document.getElementById('container');
+
+    //     let i=0;
+
+    //     id = setInterval(function(){
+    //           if(i === images.length)
+    //          {
+    //              i = 0;
+    //          }
+
+    //         let image = images[i];
+    //         container.innerHTML = ""; // to get images one after another, by replacing the previously appearing image with next image
+    //         let img = document.createElement("img");
+    //         img.src = images[i];
+
+    //         container.append(img);
+
+    //         i++;
+    //     }, 1000);
+    // }
+    // function pause()
+    // {
+    //     clearInterval(id);
+    // }
+    // output observation
+    // 1.
+    // the image is always starting from first value, when it was paused and started, it should start from where it last paused,
+    // and start from ith value
+    // 2.
+    // also the first image is being displayed after 3 seconds, we want the first image to be displayed immediately as soon as we click the start button
+
+
+
+
+
+
+
+
+
+
+
+    // Optimisation step - 4
+    
+    // let id; 
+    
+    // function start() 
+    // {
+    //     let images = JSON.parse(localStorage.getItem('images'));
+
+    //     let container = document.getElementById('container');
+
+    //     // first image being displayed
+    //     container.innerHTML = "";
+    //     let img = document.createElement("img");
+    //     img.src = images[0];
+    //     container.append(img);
+
+    //     // since we already displayed the first image , now we can start from i=1 image
+    //     let i=1;
+
+    //     id = setInterval(function()
+    //     {
+    //          if(i === images.length)
+    //          {
+    //              i = 0;
+    //          }
+
+    //         let image = images[i];
+    //         container.innerHTML = ""; // to get images one after another, by replacing the previously appearing image with next image
+    //         let img = document.createElement("img");
+    //         img.src = images[i];
+
+    //         container.append(img);
+
+    //         i++;
+    //     }, 1000);
+    // }
+    // function pause()
+    // {
+    //     clearInterval(id);
+    // }
+    // output observation
+    // // the image is always starting from first value, when it was paused and started, it should start from where it last paused,
+    // and start from ith value, in short it is not cyclic
+
+
+
+
+
+
+
+
+
+
+
+    
+    // Optimisation step - 5
+    
+    let id; 
+    let i = 0; // i avlue should be same for both start and pause function, hence declare globally
+    function start() 
+    {
+        let images = JSON.parse(localStorage.getItem('images'));
+
+        let container = document.getElementById('container');
+
+        container.innerHTML = null;
+
+        let img = document.createElement("img");
+
+        img.src = images[i];
+
+        container.append(img);
+
+        id = setInterval(function()
+        {
+            if(i === images.length)
+            {
+                i = 0;
+            }
+
+            let image = images[i];
+
+            container.innerHTML = null; // to get images one after another, by replacing the previously appearing image with next image
+            
+            let img = document.createElement("img");
+            img.src = image;
+
+            container.append(img);
+
+            i++;
+        }, 3000);
+    }
+    function pause()
+    {
+        clearInterval(id);
+    }
+    // output observation
+
+
+
+
+
+
+
+</script>

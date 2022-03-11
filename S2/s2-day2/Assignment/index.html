@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+    #st {
+        display: flex;
+        justify-content:flex-start;
+    }
+    #st > div {
+        margin-right: 20px;
+    }
+
+    #imgId{
+        width: 65%;
+        margin: auto;
+        display: flex;
+    }
+
+    #topright {
+        align-self: center;
+        margin-left: 50px;
+        font-family: cursive;
+        font-size: 50px;
+        background-color: orange;
+        color: white;
+        border-radius: 20px;
+        padding: 20px;
+        font-weight: 600;
+    }
+
+    #imgId > #res{
+        height: 500px;
+        width: 550px;
+    }
+
+    #menu {
+        width: 10%;
+        padding: 16px 11px 18px 11px;
+        text-align: center;
+        margin-left: 44%;
+        font-size: 40px;
+        font-weight: 600;
+        color: white;
+        background-color: orange;
+        border-radius: 20px;
+    }
+
+    #food {
+        margin-left: auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    #food > div{
+        margin-right: 40px;
+    }
+
+   button {
+        margin-left: 43%;
+        font-size: 30px;
+        background-color: green;
+        color: white;
+        border: 2px solid green;
+        padding: 15px 20px 15px 20px;
+        border-radius: 20px;
+        font-weight: 600;
+    }
+
+    div, button, #yn, #food, #orderTime, #orderId, #orderready{
+        font-family: cursive;
+    }
+
+    </style>
+</head>
+<body>
+
+    <div id="st" >
+        <div>Restuarant Status</div>
+        <select id="yn">
+            <option value="open">Open</option>
+            <option value="closed">Closed</option>
+        </select>
+    </div>
+    
+   <br>
+   <br>
+   <div id="menu" >Menu</div>
+   <br>
+   <br>
+    <div id="food">
+        <div>
+            <input id="pizza" type="checkbox" value="pizza" />
+            <label for="pizza">Pizza</label> 
+        </div>    
+        <div>
+            <input id="dessert" type="checkbox" value="dessert" />
+            <label for="dessert">Dessert</label>
+        </div>
+        <div>
+            <input id="burger" type="checkbox" value="burger" />
+            <label for="burger">Burger</label>
+        </div>        
+        <div>
+            <input id="fries" type="checkbox" value="fries" />
+            <label for="fries">French Fries</label>    
+        </div>        
+        <div>
+            <input id="tacoRoll" type="checkbox" value="tacoroll" />
+            <label for="tacoRoll">Taco Roll</label>
+        </div>        
+        <div>
+            <input id="sushi" type="checkbox" value="sushi" />
+            <label for="sushi">Sushi</label>
+        </div>        
+        <div>
+            <input id="bhelPuri" type="checkbox" value="bhel" />
+            <label for="bhel">Bhel Puri</label>
+        </div>
+        <div>
+            <input id="garlicBreads" type="checkbox" value="garlicbread" />
+            <label for="garlicBreads">Garlic Breads</label>
+        </div>
+        <div>
+            <input id="burgerRoll" type="checkbox" value="burgerroll" />
+            <label for="burgerRoll">Burger Roll</label>
+        </div>
+       <div>
+        <input id="vegNuggets" type="checkbox" value="nuggets" />
+        <label for="vegNuggets">Veg Nuggets</label>
+       </div> 
+    </div>
+    <br>
+    <br>
+    <button id="orderFood" onclick="orderFood()" >Order Food</button>
+    <br>
+    <br>
+    <div id="selectfirst" ></div>
+    <br>
+    <div>
+        <p id="orderTime" ></p>
+        <p id="orderId" ></p>
+        <p id="orderready" ></p>
+        <br>
+        <div id="imgId" >
+        </div>
+    </div>
+    
+
+
+</body>
+</html>
+
+<script>
+
+    let img = document.createElement("img");
+    img.setAttribute("id", "res");
+    //let imgDis = img.src;
+
+    let divafterimg = document.createElement("div");
+    divafterimg.setAttribute("id", "topright");
+
+    async function orderFood()
+    {
+        let status = document.querySelector("#yn").value;
+
+        let pizzaimgDis = "http://images2.fanpop.com/images/photos/7300000/Slice-of-Pizza-pizza-7383219-1600-1200.jpg";
+        let dessertimgDis = "https://prettysweetblog.com/wp-content/uploads/2017/01/DSC_0103.jpg";
+        let burgerimgDis = "https://menu-images-static.skipthedishes.com/images/resized/item-1139b73f91f9e2fb9587.jpg";
+        let frenchfriesimgDis = "https://doyouremember.com/wp-content/uploads/2019/12/french-fries.jpg";
+        let tacorollimgDis = "https://tse1.mm.bing.net/th?id=OIP.GQjOLrDXgCp6EeIsQwr2swHaFP&pid=Api&P=0&w=244&h=173";
+        let sushiimgDis = "http://www.readersdigest.ca/wp-content/uploads/2011/11/japanese-sushi-rolls.jpg";
+        let bhelpuriimgDis = "https://i1.wp.com/vegecravings.com/wp-content/uploads/2018/06/Bhel-Puri-Recipe-Step-By-Step-Instructions.jpg?fit=1972%2C1874&quality=30&strip=all&ssl=1";
+        let garlicbreadsimgDis = "https://news.yummyeveryday.com/wp-content/uploads/2018/01/the-best-garlic-bread-youll-ever-eat.jpg";
+        let burgerrollimgDis = "https://www.vvsupremo.com/wp-content/uploads/2017/06/Bacon-Wrapped-Burger-Log-900x570-sRGB-900x570.jpg";
+        let vegnuggetsimgDis = "https://i.ytimg.com/vi/E0s1G3JYtGE/maxresdefault.jpg";
+
+        let shopclosedimgDis = "http://jolles.com/images/noordertaking.png";
+
+        let time = Math.floor(Math.random() * 10000);
+        let orderId = Math.floor(Math.random() * 100);
+        orderId = Math.floor(orderId).toFixed(0);
+
+        let foodProm = new Promise(function(resolve, reject)
+        {
+            if(status === "closed")
+            {
+                reject("Not taking orders!");
+                document.querySelector("#imgId").append(img);
+            }
+            else
+            {
+                console.log(`Your order will be ready in ${time} seconds`);
+                console.log(`Your order id is ${orderId}`);
+                document.getElementById("orderTime").innerText = `Your order will be ready in ${time} seconds`;
+                document.getElementById("orderId").innerText = `Your order id is ${orderId}`;
+
+                setTimeout(function()
+                {
+                    if(check("pizza"))
+                    {
+                        let pizza = document.getElementById("pizza").value;
+                        resolve(pizza);
+
+                        document.querySelector("#imgId").append(img, divafterimg);
+                    }
+                    else if (check("dessert"))
+                    {
+                        let dessert = document.getElementById("dessert").value;
+                        resolve(dessert);
+                        document.querySelector("#imgId").append(img, divafterimg);
+                    }
+                    else if (check("burger"))
+                    {
+                        let burger = document.getElementById("burger").value;
+                        resolve(burger);
+                        document.querySelector("#imgId").append(img, divafterimg);
+                    }
+                    else if (check("fries"))
+                    {
+                        let fries = document.getElementById("fries").value;
+                        resolve(fries);
+                        document.querySelector("#imgId").append(img, divafterimg);
+                    }
+                    else if (check("tacoRoll"))
+                    {
+                        let tacoRoll = document.getElementById("tacoRoll").value;
+                        resolve(tacoRoll);
+                        document.querySelector("#imgId").append(img, divafterimg);
+                    }
+                    else if (check("sushi"))
+                    {
+                        let sushi = document.getElementById("sushi").value;
+                        resolve(sushi);
+                        document.querySelector("#imgId").append(img, divafterimg);
+                    }
+                    else if (check("bhelPuri"))
+                    {
+                        let bhelPuri = document.getElementById("bhelPuri").value;
+                        resolve(bhelPuri);
+                        document.querySelector("#imgId").append(img, divafterimg);
+                    }
+                    else if (check("garlicBreads"))
+                    {
+                        let garlicBreads = document.getElementById("garlicBreads").value;
+                        resolve(garlicBreads);
+                        document.querySelector("#imgId").append(img, divafterimg);
+                    }
+                    else if (check("vegNuggets"))
+                    {
+                        let vegNuggets = document.getElementById("vegNuggets").value;
+                        resolve(vegNuggets);
+                        document.querySelector("#imgId").append(img, divafterimg);
+                    }
+            
+                    document.getElementById("orderready").innerText = `Yay, your order is ready!!! ${"\n"} You may collect it from the counter :)`;
+                    console.log(`Your order is ready!!`);
+                }, time);
+                
+            }
+
+            function check(id)
+            {
+                return document.getElementById(id).checked;
+            }
+        });
+        
+
+
+
+
+
+
+
+
+        // resolve output
+        try
+        {
+            var response = await foodProm;
+            if(response === "pizza")
+            {
+                document.querySelector("#res").src = pizzaimgDis;
+                document.querySelector("#topright").innerText = `Order Id: ${orderId}`;            
+            }
+            else if(response === "dessert")
+            {
+                document.querySelector("#res").src = dessertimgDis;   
+                document.querySelector("#topright").innerText = `Order Id: ${orderId}`;            
+            }
+            else if(response === "burger")
+            {
+                document.querySelector("#res").src = burgerimgDis;    
+                document.querySelector("#topright").innerText = `Order Id: ${orderId}`;             
+            }
+            else if(response === "fries")
+            {
+                document.querySelector("#res").src = frenchfriesimgDis;  
+                document.querySelector("#topright").innerText = `Order Id: ${orderId}`;      
+            }
+            else if(response === "tacoRoll")
+            {
+                document.querySelector("#res").src = tacorollimgDis;
+                document.querySelector("#topright").innerText = `Order Id: ${orderId}`;     
+            }
+            else if(response === "sushi")
+            {
+                document.querySelector("#res").src = sushiimgDis;
+                document.querySelector("#topright").innerText = `Order Id: ${orderId}`;     
+            }
+            else if(response === "bhelPuri")
+            {
+                document.querySelector("#res").src = bhelpuriimgDis;
+                document.querySelector("#topright").innerText = `Order Id: ${orderId}`;     
+            }
+            else if(response === "garlicBreads")
+            {
+                document.querySelector("#res").src = garlicbreadsimgDis;
+                document.querySelector("#topright").innerText = `Order Id: ${orderId}`;     
+            }
+            else if(response === "burgerRoll")
+            {
+                document.querySelector("#res").src = burgerrollimgDis;
+                document.querySelector("#topright").innerText = `Order Id: ${orderId}`;     
+            }
+            else
+            {
+                document.querySelector("#res").src = vegnuggetsimgDis;
+                document.querySelector("#topright").innerText = `Order Id: ${orderId}`;     
+            } 
+        }
+
+        // rejected output
+        catch(error)
+        {
+            console.log(error);
+            document.querySelector("#res").src = shopclosedimgDis;
+        }
+    };
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

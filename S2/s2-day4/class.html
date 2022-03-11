@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="text" id="city">
+    <button onclick="getWeather()" >GET WEATHER</button>
+    <div id="container" ></div>
+
+</body>
+</html>
+
+<script>
+
+    let container = document.getElementById("container");
+
+    let url = "2eb6af51caf1bccebdf06e76fd1f2bb8";
+    async function getWeather() 
+    {
+        try{
+            let city = document.getElementById("city").value;
+
+            let res = await fetch(
+                // to get temperature in 39.8 not as 398, use units=metric
+                `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=2eb6af51caf1bccebdf06e76fd1f2bb8&units=metric`
+            );
+
+            let data = await res.json();
+            console.log(data);
+
+            appendData(data);
+        }   catch(err){
+            console.log(err);
+        }
+    }
+
+    
+    function appendData(data){
+
+        // each single time we want new data to replace previously displayed data
+        container.innerHTML = null;
+
+
+        let name = document.createElement("h3");
+        name.innerText = data.name;
+
+        let temp = document.createElement("h3");
+        temp.innerText = data.main.temp;
+
+        let pressure = document.createElement("h3");
+        pressure.innerText = data.main.pressure;
+
+        let humidity = document.createElement("h3");
+        humidity.innerText = data.main.humidity;
+
+        container.append(name, temp, pressure, humidity);
+    }
+
+</script>
