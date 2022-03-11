@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <select id="food" >
+        <option value="fries">Fries</option>
+        <option value="burger">Burger</option>
+        <option value="coke">Coke</option>
+        <option value="vadapav">Vadapav</option>
+    </select>
+    <button onclick="orderFood()" >Order</button>
+
+</body>
+</html>
+<script>
+
+    // let passexam = false;
+
+    // let myProm = new Promise(function(resolve, reject) {
+
+    //     if(passexam) {
+    //         resolve("bike");
+    //     }
+    //     else{
+    //         reject("nothing");
+    //     }
+    // });
+    // // console.log("myProm:", myProm);
+
+
+    // // success
+    // myProm.then(function(response) {
+    //     console.log("response:", response); // bike
+    // });
+
+    // //failure
+    // myProm.catch(function(error) {
+    //     console.log("error:", error); // nothing
+    // });
+
+
+
+
+
+
+
+
+
+    function get(id)
+    {
+        return document.getElementById(id).value;
+    }
+
+    async function orderFood()
+    {
+        let food = get("food");
+        //console.log("food:", food);
+        let status = "open";
+
+        let foodPromise = new Promise(function(resolve, reject)
+        {
+
+            let time = Math.random() * 10000; 
+
+            if(status === "closed")
+            {
+                reject("Shop closed!");
+            }
+            else
+            {
+                setTimeout(function()
+                {
+                    resolve(food);
+                }, time);
+            }      
+        });
+
+
+        // this is also called exception handling
+
+        // WAY-1
+        // foodPromise.then(function(response) {
+        //     console.log(`${response} is ready`);
+
+        //     // if(response == "Burger")
+        //     // {
+        //     //     display the burger image on dom
+        //     // }
+
+        // });
+
+        // foodPromise.catch(function(error){
+        //     console.log("error");
+        // });
+
+
+        // WAY-2
+        try
+        {
+            var response = await foodPromise;
+            console.log(response);
+        }
+        catch(error)
+        {
+            console.log(error);
+        }
+       
+    }
+
+
+
+
+    
+</script>

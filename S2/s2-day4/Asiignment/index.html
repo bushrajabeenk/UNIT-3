@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="text" id="city">
+
+    <button onclick="getWeather()" >GET WEATHER</button>
+    <div id="container" ></div>
+    <br>
+    <div id="nextcontainer" ></div>
+
+    <style>
+
+        #container {
+            width: 80%;
+            display: flex;  
+            justify-content: center;
+            margin: auto;   
+            margin-bottom: 30px;  
+        }
+
+        #container > div {
+            margin-top: 50px;
+        }
+
+        #container > div:first-child{
+            margin-right: 150px;
+        }
+
+        #nextcontainer{
+            width: 90%;
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            font-family: sans-serif;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            border-radius: 10px;
+        }
+
+        #nextcontainer > div{
+            height: 250px;
+            width: 100%;
+            text-align: center;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            border-radius: 10px;
+            margin: auto;
+        }
+
+        #nextcontainer > div:nth-child(even)
+        {
+            background-color: rgb(215, 247, 247);
+        }
+
+        #nextcontainer > div:nth-child(odd)
+        {
+            background-color: rgb(231, 247, 247);
+        }
+
+        #name{
+            margin-bottom: 80px;
+        }
+
+       
+
+    </style>
+
+</body>
+</html>
+
+<script>
+
+    let container1 = document.getElementById("container");
+    let container2 = document.getElementById("nextcontainer");
+
+    async function getWeather() 
+    {
+        try{
+
+            //question-part-1
+            let city = document.getElementById("city").value;
+            let res = await fetch(
+                // to get temperature in 39.8 not as 398, use units=metric
+                `https://api.openweathermap.org/data/2.5/weather?q=${city}&exclude=hourly,minutely,alerts,current&appid=2eb6af51caf1bccebdf06e76fd1f2bb8&units=metric`);
+            let data = await res.json();
+            console.log(data);
+            appendData(data);
+
+            // question-part-2
+            let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=current,hourly,minutely&appid=2eb6af51caf1bccebdf06e76fd1f2bb8&units=metric`;
+            let resp = await fetch(url);
+            let data2 = await resp.json();
+            console.log(data2);
+            //console.log(data2.daily[0].temp.min);
+            appendData2(data2);
+
+        }   catch(err){
+            console.log(err);
+        }
+    }
+
+
+    function appendData(data){
+
+        // each single time we want new data to replace previously displayed data
+        container1.innerHTML = null;
+
+        let div1 = document.createElement("div");
+
+        let name = document.createElement("h3");
+        name.innerText = `CITY ${data.name}`;
+
+        let temp_max = document.createElement("h3");
+        temp_max.innerText = `MAX TEMPERATURE ${data.main.temp_max}`;
+
+        let temp_min = document.createElement("h3");
+        temp_min.innerText = `MIN TEMPERATURE ${data.main.temp_min}`;
+
+        let wind = document.createElement("h3");
+        wind.innerText = ` WIND SPEED ${data.wind.speed}`;
+
+        let clouds = document.createElement("h3");
+        clouds.innerText = `CLOUDS ${data.clouds.all}`;
+
+        let sunrise = document.createElement("h3");
+        sunrise.innerText = `SUNRISE ${data.sys.sunrise}`;
+
+        let sunset = document.createElement("h3");
+        sunset.innerText = `SUNSET ${data.sys.sunset}`;
+
+        div1.append(name, temp_max, temp_min, wind, clouds, sunrise, sunset);
+
+        let div2 = document.createElement("div");
+
+        let iframe = document.createElement("iframe");
+        iframe.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBgQBVeDxN3gpwYaImC94iaL0nN7S81tjY&q=${data.name}`;
+        iframe.height = `300px`;
+        iframe.width = `500px`;
+        iframe.style.borderRadius = `10px`;
+
+        div2.append(iframe);
+
+        container1.append(div1, div2);
+
+    }
+
+
+    function appendData2(data2)
+    {
+        container2.innerHTML = null;
+
+        let day = data2.daily;
+        var obj = {0:"Sun", 1:"Mon", 2:"Tue", 3:"Wed", 4:"Thu", 5:"Fri", 6:"Sat", 7:"Sun"};
+
+        day.map(function(el, index){
+
+            let innerDiv = document.createElement("div");
+            innerDiv.setAttribute("id", "innerDiv");
+
+            let p1 = document.createElement("h1");
+            p1.setAttribute("id", "name");
+            p1.innerText = `${obj[index]}`;
+
+            let p2 = document.createElement("h1");
+            var maximum = el.temp.max.toFixed(0);
+            p2.innerText = `${maximum}`;
+
+            let p3 = document.createElement("h2");
+            var minimum = el.temp.min.toFixed(0);
+            p3.innerText = `${minimum}`;
+
+            let p4 = document.createElement("p");
+            p4.innerText = `${el.sunrise}`;
+
+            let p5 = document.createElement("p");
+            p5.innerText = `${el.sunset}`;
+
+            innerDiv.append(p1, p2, p3);
+
+            index++;
+
+            container2.append(innerDiv);
+            
+        })
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+</script>
+
+
+
+

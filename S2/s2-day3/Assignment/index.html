@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta title="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        #movies{
+            margin-top: 100px;
+            text-align: center;
+        }
+
+        #img1 {
+            height: 300px;
+            width: 600px;
+        }
+
+        #img2 {
+            height: 350px;
+            width: 500px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <input type="text" oninput="searchData()" id="query">
+
+    <div id="movies" ></div>
+
+</body>
+</html>
+
+<script>
+
+    let movies = document.querySelector("#movies");
+
+    async function searchData(){
+        try{
+
+            let input = document.querySelector("#query").value;
+            let url = `https://www.omdbapi.com/?apikey=9e05b8b6&t=${input}`;
+
+            let res = await fetch(url);
+
+            let data = await res.json();
+
+            console.log(data);
+            appendData(data);
+
+        } catch(err){
+            console.log(err);
+        }
+    }
+
+    function appendData(data)
+    {
+
+        movies.innerHTML = null;
+
+        var innerDiv = document.createElement("div");
+        innerDiv.id = "innerDiv";
+
+        //optimisation
+        if(data.Title === undefined)
+        {
+            let img1 = document.createElement("img");
+            img1.src = `https://www.jewelxy.com/b2b/assets/images/banner-img/no_record_found_banner.png`;
+            img1.id = "img1";
+            document.querySelector("#movies").append(img1);
+        }
+
+        else
+        {
+            if(data.imdbRating > 8.5)
+            {
+                var img3 = document.createElement("img");
+                img3.src = "https://t3.ftcdn.net/jpg/01/03/57/24/500_F_103572480_wFk0Z6wA4FVSNikaSLAOGP3FkC324SFq.jpg";
+                img3.setAttribute("id", "img3");
+                innerDiv.append(img3);
+            }
+            var img2 = document.createElement("img");
+            img2.src = data.Poster;
+            img2.setAttribute("id", "img2");
+
+            var releaseDate = document.createElement("h3");
+            releaseDate.innerText = `Release Date: ${data.Released}`;
+            releaseDate.setAttribute("id", "releaseDate");
+
+            var title = document.createElement("h2");
+            title.innerText = `Title: ${data.Title}`;
+            title.setAttribute("id", "title");
+
+            var rated = document.createElement("h3");
+            rated.innerText = `imdbRatings: ${data.imdbRating}`;
+            rated.setAttribute("id", "rated");
+
+            innerDiv.append(img2, title, releaseDate, rated);
+
+            movies.append(innerDiv);
+        } 
+    }
+
+
+
+</script>

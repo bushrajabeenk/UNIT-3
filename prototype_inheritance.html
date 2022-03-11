@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+
+// in the below function city parameter is created in the prototype, not in the object
+
+    // function Person(n, a){
+    //     this.name = n; 
+    //     this.age = a;
+    // }
+
+    // Person.prototype.city = 'Mumbai';
+
+    // var p1 = new Person('raj', 23);
+
+    // console.log(p1);
+    // console.log(p1.city); // this will give Mumbai
+
+
+
+
+
+
+// --------------------------------------------------------------------------
+
+
+
+
+
+
+// in the below function city gets created in the object data directly
+// (city parameter is also available in the prototype)
+
+    // function Person(n, a){
+    //     this.name = n; 
+    //     this.age = a;
+    // }
+
+    // // here we are creating a parameter city
+    // Person.prototype.city = function(c){
+    //     this.city = c;  // this keyword creates a new parameter with name city
+    // }
+
+    // var p1 = new Person('raj', 23);    
+
+    // // giving data to the newly created parameter city
+    // p1.city('Mumbai');
+    // console.log(p1);
+
+
+
+
+
+
+// -----------------------------------------------------------------------------------
+
+
+
+
+
+
+// in the below function we use the setCity function to create a parameter city in the object data directly
+// (setCity function is also available in the prototype)
+
+    // function Person(n, a){
+    //     this.name = n; 
+    //     this.age = a;
+    // }
+
+    // Person.prototype.setCity = function(c){
+    //     this.city = c;
+    // }
+
+    // var p1 = new Person('raj', 23);    
+
+    // p1.setCity('Mumbai');
+    // console.log(p1);
+
+
+
+
+
+
+// ---------------------------------------------------------------------------------------
+
+
+
+
+// hasOwnProperty()
+
+        // var a = {
+        //     name: "Tim"
+        // };
+
+        // var b = Object.create(a);
+        // console.log(b); 
+        // //but the output Tim is present in the prototypr, not in the object
+        // // 
+        // console.log(b.hasOwnProperty("name"));
+        // // this shows because name is not the property of b, it is inherited from a,
+        // // which will be present in the prototype
+
+
+        
+        var a = {
+            name: "Tim"
+        };
+
+        var b = Object.create(a);
+        console.log(b);
+
+        b.age = 21;
+        console.log(b.hasOwnProperty("age"));
+        // this shows true, because age is the property of b
+
+
+
+
+
+</script>

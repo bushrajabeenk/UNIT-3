@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+
+    // const masaistud = {
+    //     batch: "web-16",
+    //     institute: "masai school",
+    //     currentunit: 3,
+    //     nickname: "pikachus",    
+    // };
+    // const s1 = Object.create(masaistud, { "name": { value: "bushra" } });
+    // const s2 = Object.create(masaistud, { "name": { value: "humera" } });    
+    // console.log(s1, s2);
+
+
+
+    // flipkart object data using Object.create()
+    // create a flipkart catalogue
+
+    // const product = {
+    //     logo: "",
+    //     brand: "nike",
+    //     seller: "flipkart",
+    //     type_of_delivery: "free"
+    // };
+
+    // const p1 = Object.create(product, { "price" : { value: 2000 } });
+    // const p2 = Object.create(product, { "price" : { value: 6000 } });
+    // const p3 = Object.create(product, { "price" : { value: 12000 } });
+    // const p4 = Object.create(product, { "price" : { value: 20000 } });
+
+    // var arr = [];
+    // arr.push(p1, p2, p3, p4);
+    // console.log(arr);
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //prototype chain
+
+    // let grandfather = {
+    //     eyes: "blue",
+    // };
+
+    // let father = Object.create(grandfather);
+    // father.eyes = "yellow";
+    // let son = Object.create(father);
+
+    // console.log("son:", son.eyes);
+    //output: yellow
+
+    // here it first checks for inheritance in the first immediate heirarchy, i.e father
+    // if that is not available, then it goes for next higher level, i.e grandfather
+
+    // let grandfather = {
+    //     eyes: "blue",
+    // };
+
+    // let father = Object.create(grandfather);
+    // // father.eyes = "yellow";
+    // let son = Object.create(father);
+
+    // console.log("son:", son.eyes);
+    //ouput: blue
+
+
+
+
+
+
+
+
+
+
+
+
+    // //creating our custom array function
+
+    // // original array function
+    // let arr1 = new Array("a", "b", "c", "d");
+    // console.log("OriginalArrayFunction:", arr1);
+
+    // // original push function
+    // arr1.push("e");
+    // console.log(arr1);
+
+    // //orignal pop function
+    // arr1.pop();
+    // arr1.pop();
+    // console.log(arr1);
+
+
+
+
+    // //my custom array function
+    // let arr = new myCustomArray("a", "b", "c", "d");
+    // console.log("MyCustomArrayFunction:", Object.values(arr));
+
+    // function myCustomArray()
+    // {
+    //     Object.defineProperty(this, "length", {
+    //         value: 0,
+    //         writable: true,
+    //         enumerable: false,
+    //     });
+
+    //     for(let i=0; i<arguments.length; i++)
+    //     {
+    //         this[i] = arguments[i];
+    //     }
+
+    //     this.length = arguments.length;
+    // }
+
+    // //creating our custom push function
+    // myCustomArray.prototype.पुश = function (data){
+
+    //     let index = this.length;
+    //     this[index] = data;
+
+    //     this.length++;
+    // }
+
+    // arr.पुश("e");
+    // console.log(Object.values(arr));
+
+    // //creating our custom pop function
+    // myCustomArray.prototype.हटाओ = function (){
+
+    //     let index = this.length-1;
+    //     delete this[index];
+
+    //     this.length--;
+    // }
+
+    // arr.हटाओ();
+    // arr.हटाओ();
+    // console.log(Object.values(arr));
+
+
+
+
+
+
+
+
+</script>

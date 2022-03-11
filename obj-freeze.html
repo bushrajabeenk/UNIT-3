@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+
+<script>
+
+// first data
+    var admin = {
+        name: "Mark Twight",
+        password: "fbismine",
+        age: 56
+    };
+
+    Object.freeze(admin);
+
+// second data
+    admin = {
+        name: "Elon Musk",
+        password: "everythingismine",
+        age: 35
+    };
+
+    console.log(admin);
+    // second data gets displayed
+
+
+
+
+
+
+
+// first data
+var admin = {
+        name: "Mark Twight",
+        password: "fbismine",
+        age: 56
+    };
+
+    Object.freeze(admin);
+
+// second data
+   admin.name = "Elon Musk";
+   
+   console.log(admin);
+// all the data from first data gets displayed, as the entire admin object is freezed,
+// we cannot access the object.property_value from the freezed object itself
+// i.e we cannot access the object properties like, name, password, age
+// instead we have to redefine the entire object
+
+
+
+
+</script>

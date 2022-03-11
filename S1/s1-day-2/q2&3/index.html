@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        #myForm{
+            padding-top: 20px;
+            background-color:teal;
+            color: white;
+            height: 350px;
+            width: 30%;
+            margin: auto;
+        }
+
+        #myForm > div:last-child > input{
+            color: black;
+            font-family: sans-serif;
+            font-size: 15px;
+        }
+        
+        #myForm > div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+        } 
+
+
+        table, td, th 
+        {
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 70%;
+            margin: auto;
+            margin-top: 50px;
+            font-family: sans-serif;
+        }
+
+        th, td 
+        {
+            padding: 15px;
+        }
+
+        tr > th {
+            background-color: teal;
+            color: white;
+        }
+
+
+    </style>
+</head>
+<body>
+   
+    <form id="myForm" >
+        <div>
+            <p>Student's Name:</p>
+            <input id="name" type="text">
+            <br>
+        </div>
+        <div>
+            <p>Student's Number:</p>
+            <input id="number" type="number" >
+            <br>
+        </div>
+        <div>
+            <p>Student's City:</p>
+            <input id="city" type="text" >
+            <br>
+        </div>
+        <div>
+            <br>
+            <input type="submit" >
+        </div>        
+    </form>
+
+    <br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>NUMBER</th>
+                <th>CITY</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+    
+</body>
+</html>
+
+<script>
+
+    document.querySelector("#myForm").addEventListener("submit", display);
+
+    function display(e)
+    {
+        e.preventDefault();
+
+        var stuArray = JSON.parse(localStorage.getItem("stuData")) || [];
+
+        var stuName = document.querySelector("#name").value;
+        var stuNumber = document.querySelector("#number").value;
+        var stuCity = document.querySelector("#city").value;
+
+        function studentDetails(nme, num, cty)
+        {
+            this.name = nme;
+            this.number = num;
+            this.city = cty;
+        }
+
+        var stuone = new studentDetails(stuName, stuNumber, stuCity);
+
+        stuArray.push(stuone);
+        console.log(stuArray);
+        localStorage.setItem("stuData", JSON.stringify(stuArray));
+    }
+
+
+    var stuArray = JSON.parse(localStorage.getItem("stuData")) || [];
+
+    displayData(stuArray);
+
+    function displayData(stuArray) {
+        stuArray.map(function(item){
+            var row = document.createElement("tr");
+
+            var col1 = document.createElement("td");
+            col1.innerText = item.name;
+            var col2 = document.createElement("td");
+            col2.innerText = item.number;
+            var col3 = document.createElement("td");
+            col3.innerText = item.city;
+
+            row.append(col1, col2, col3);
+
+            document.querySelector("tbody").append(row);
+        })
+    }
+
+</script>
