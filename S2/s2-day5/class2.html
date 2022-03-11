@@ -31,7 +31,7 @@
 
             let input = document.getElementById("query").value;
 
-            let res = await fetch(`httpS://www.omdbapi.com/?apikey=9e05b8b6&s=${input}`);
+            let res = await fetch(`https://www.omdbapi.com/?apikey=9e05b8b6&s=${input}`);
 
             let data = await res.json();
 

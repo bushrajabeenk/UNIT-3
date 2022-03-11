@@ -41,6 +41,7 @@
         try{
 
             let input = document.querySelector("#query").value;
+            
             let url = `https://www.omdbapi.com/?apikey=9e05b8b6&t=${input}`;
 
             let res = await fetch(url);
@@ -85,19 +86,47 @@
             img2.src = data.Poster;
             img2.setAttribute("id", "img2");
 
+            var title = document.createElement("h2");
+            title.innerText = `Title: ${data.Title}`;
+            title.setAttribute("id", "title");
+
+            var cast = document.createElement("h3");
+            cast.innerText = `Cast: ${data.Actors}`;
+            cast.setAttribute("id", "actors");
+
+            var director = document.createElement("h3");
+            director.innerText = `Director: ${data.Director}`;
+            director.setAttribute("id", "director");
+
+            var writer = document.createElement("h3");
+            writer.innerText = `Writer: ${data.Writer}`;
+            writer.setAttribute("id", "writer");
+
+            var genre = document.createElement("h3");
+            genre.innerText = `Genre: ${data.Genre}`;
+            genre.setAttribute("id", "genre");
+
+            var language = document.createElement("h3");
+            language.innerText = `Language: ${data.Language}`;
+            language.setAttribute("id", "language");
+
+            var country = document.createElement("h3");
+            country.innerText = `Country: ${data.Country}`;
+            country.setAttribute("id", "country");
+
             var releaseDate = document.createElement("h3");
             releaseDate.innerText = `Release Date: ${data.Released}`;
             releaseDate.setAttribute("id", "releaseDate");
 
-            var title = document.createElement("h2");
-            title.innerText = `Title: ${data.Title}`;
-            title.setAttribute("id", "title");
+            var releaseYear = document.createElement("h3");
+            releaseYear.innerText = `Release Year: ${data.Year}`;
+            releaseYear.setAttribute("id", "releaseYear");
 
             var rated = document.createElement("h3");
             rated.innerText = `imdbRatings: ${data.imdbRating}`;
             rated.setAttribute("id", "rated");
 
-            innerDiv.append(img2, title, releaseDate, rated);
+            innerDiv.append(img2, title, cast, director, writer, genre, language, country, releaseDate, releaseYear, rated);
 
             movies.append(innerDiv);
         } 

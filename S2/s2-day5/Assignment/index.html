@@ -5,8 +5,131 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+
+        #movies{
+            margin-top: 100px;
+            text-align: center;
+        }
+        
+        #img1 {
+            height: 300px;
+            width: 600px;
+        }
+
+        #img2 {
+            height: 350px;
+            width: 500px;
+        }
+
+
+    </style>
+
 </head>
 <body>
     
+    <input type="text" oninput="debounce(main, 2000)" id="query">
+
+    <div id="movies" ></div>
+
 </body>
 </html>
+
+<script>
+
+    let timerid;
+    let movies = document.querySelector("#movies");
+
+    async function searchMovie()
+    {
+        try{
+
+            let input = document.getElementById("query").value;
+
+            let res = await fetch(`https://www.omdbapi.com/?apikey=9e05b8b6&s=${input}`);
+
+            let data = await res.json();
+            console.log(data)
+
+            let arrayMovies = data.Search;
+
+            return arrayMovies;
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
+
+    function appendMovies(data)
+    {
+        // so that the movie we are searching for, appers at the top/first
+        movies.innerHTML = null;
+
+        var innerDiv = document.createElement("div");
+        innerDiv.id = "innerDiv";
+
+        if(data === undefined){
+            return false;
+        }
+
+        data.forEach(function(el){
+
+            var img2 = document.createElement("img");
+            img2.src = el.Poster;
+            img2.setAttribute("id", "img2");
+
+            var title = document.createElement("h2");
+            title.innerText = `Title: ${el.Title}`;
+            title.setAttribute("id", "title");
+
+            var releaseYear = document.createElement("h3");
+            releaseYear.innerText = `Release Year: ${el.Year}`;
+            releaseYear.setAttribute("id", "releaseYear");
+
+            var rated = document.createElement("h3");
+            rated.innerText = `imdbRatings: ${data.imdbRating}`;
+            rated.setAttribute("id", "rated");
+
+            innerDiv.append(img2, title, releaseYear);
+
+            movies.append(innerDiv);
+        });
+      
+    }
+
+    async function main(){
+        try{
+            let data = await searchMovie();
+
+            if(data === undefined){
+                return false;
+            }
+
+            appendMovies(data);
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
+
+    function debounce(func, delay){
+
+        if(timerid){
+            clearTimeout(timerid);
+        }
+
+        timerid = setTimeout(function(){
+            func();
+        }, delay);
+
+    }
+
+
+
+
+
+// main function is doing the job
+</script>
